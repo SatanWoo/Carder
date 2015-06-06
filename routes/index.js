@@ -8,7 +8,6 @@ router.get('/iframe', function(req, res) {
 
 router.get('/download', function(req, res) {
     var url = req.query.url;
-    console.log('url is ' + url);
     var timeout = req.query.timeout || 3000;
 
     if (!url) {
@@ -22,13 +21,12 @@ router.get('/download', function(req, res) {
 
 router.get('/render', function(req, res) {
     var url = req.query.url;
-    console.log('url is ' + url);
-
     var timeout = req.query.timeout || 3000;
+    
     if (!url) {
-       
+        return res.json({error: 'no url specified'});
     }
-
+    
     renderer.render(url, timeout, function(err, html) {
         return res.json({html: html});
     });
