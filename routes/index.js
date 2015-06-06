@@ -1,9 +1,23 @@
 var express = require('express');
 var router = express.Router();
 var renderer = require('../lib/renderer');
+var lzx = require('../lib/lzx');
 
 router.get('/iframe', function(req, res) {
-  res.render('iframe1',{
+    var url = req.query.url;
+    var source = req.query.source || 'default';
+    if (!url) return res.send('no url specified');
+
+    lzx.transform(url, source).
+        then(function(data) {
+            res.render('iframe', {
+                query: req.query,
+                data: data
+            });
+        });
+});
+router.get('/common', function(req, res) {
+  res.render('common',{
     'images':[
       'http://ww1.sinaimg.cn/bmiddle/6ecbbfd0jw1estmaewqtpj20p018gtd4.jpg',
       'http://ww4.sinaimg.cn/bmiddle/6ecbbfd0jw1estmaflfmyj20p018gjws.jpg'
@@ -28,16 +42,13 @@ router.get('/product', function(req, res) {
 });
 
 router.get('/render', function(req, res) {
-  var url = req.query.url;
-  console.log('url is ' + url);
-  var timeout = req.query.timeout || 3000;
-  if (!url) {
-    return res.json({error: 'no url specified'});
-  }
-  
-  renderer.render(url, timeout, function(err, html) {
-    return res.json({html: html});
-  });
+    var url = req.query.url;
+    var timeout = req.query.timeout || 3000;
+    if (!url) return res.json({error: 'no url specified'});
+
+    renderer.render(url, timeout, function(err, html) {
+        return res.json({html: html});
+    });
 });
 
 module.exports = router;

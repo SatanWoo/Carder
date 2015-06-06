@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <title>Carder</title>
-  <link rel="stylesheet" href="/stylesheets/product1.css"/>
+  <link rel="stylesheet" href="/stylesheets/common.css"/>
 </head>
 <body>
 <div class="card">
-  <header class="card-gallery" id="slideList">
+  <header  id="slideList">
     <%images.forEach(function(slideImg,index){%>
     <%if(index == 0){%>
-    <div class="card-image-wrap slideCard" style="left: 0;">
-    <%}else{%>
-      <div class="card-image-wrap slideCard">
-    <%}%>
+    <div class=" slideCard" style="left: 0;">
+      <%}else{%>
+      <div class="slideCard">
+        <%}%>
         <div class="card-image" style="background-image: url(<%=slideImg%>);" alt="" ></div>
       </div>
-    <%})%>
+      <%})%>
       <a href="javascript:void(0)" id="before" class="iconfont"> &#xe61b;</a>
       <a href="javascript:void(0)" id="after" class="iconfont"> &#xe615;</a>
   </header>
@@ -25,19 +25,17 @@
       <%=title%>
     </div>
     <div class="card-description" id="content">
-      <%=detail%>
+      <%=paragraph%>
     </div>
     <footer class="card-footer">
-      <span class="card-price">
-        <span class="card-price-inner"><%=price%></span>
-      </span>
+      <a target="_blank" href="<%=url%>" class="knowMore">Know More</a>
     </footer>
   </div>
   <script src="/script/slide.js"></script>
   <script>
-    var slide = new Slide('slideList','slideCard','before','after','content',340);
+    var slide = new Slide('slideList','slideCard','before','after','content',150);
     slide.autoSlide();
   </script>
-</div>
+  </div>
 </body>
 </html>
