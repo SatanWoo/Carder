@@ -25,3 +25,14 @@
   priceCurrency: "货币，一般是USD"
 }
 ```
+
+##### 土豆
+
+请求source为`Tudou`。
+
+```
+{
+  type: "tudou",
+  tudouId: "土豆ID"
+}
+```

@@ -3,6 +3,10 @@ var router = express.Router();
 var API = require('../lib/API');
 var lzx = require('../lib/lzx');
 
+router.get('/', function(res, res) {
+  return res.render('index');
+});
+
 router.get('/iframe', function(req, res) {
     var url = req.query.url;
     var source = req.query.source || 'default';
