@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Carder</title>
+  <link rel="stylesheet" href="/stylesheets/product1.css"/>
+</head>
+<body>
+<div class="card">
+  <header class="card-gallery" id="slideList">
+    <div id="before"></div>
+    <div id="after"></div>
+    <%images.forEach(function(slideImg,index){%>
+    <%if(index == 0){%>
+    <div class="card-image-wrap slideCard" style="left: 0;">
+    <%}else{%>
+      <div class="card-image-wrap slideCard">
+    <%}%>
+        <img class="card-image" src="<%=slideImg%>" alt="" />
+      </div>
+    <%})%>
+  </header>
+  <div class="card-content">
+    <div class="card-title">
+      Buberry Hopson
+    </div>
+    <div class="card-description">
+      Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+    </div>
+    <footer class="card-footer">
+      <span class="card-price">
+        $<span class="card-price-inner">199.99</span>
+      </span>
+    </footer>
+  </div>
+  <script src="/script/slide.js"></script>
+  <script>
+    var slide = new Slide('slideList','slideCard','before','after');
+    slide.autoSlide();
+  </script>
+</div>
+</body>
+</html>

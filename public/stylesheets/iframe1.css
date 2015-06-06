@@ -1,0 +1,79 @@
+html,body{
+    margin:0;
+    padding:0;
+    width:100%;
+    height:100%;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+@font-face {font-family: "iconfont";
+    src: url('/font/iconfont.eot'); /* IE9*/
+    src: url('/font/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('/font/iconfont.woff') format('woff'), /* chrome、firefox */
+    url('/font/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url('/font/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+.iconfont {
+    font-family:"iconfont" !important;
+    font-size:16px;
+    font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#card{
+    width:150px;
+    height:250px;
+}
+#imageSlide{
+    width:100%;
+    height: 30%;
+    background-color: #000000;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+#imgList{
+    width:100%;
+    height:100%;
+}
+.eachImg{
+    /*opacity: 0;*/
+    height: 100%;
+    width:100%;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center 0;
+}
+.content{
+    height:70%;
+    overflow: auto;
+}
+#imageSlide>.before,#imageSlide>.after{
+    position: absolute;
+    top:50%;
+    border-radius: 100px;
+    display: inline-block;
+    width:30px;
+    height: 30px;
+    background-color: rgba(255,255,255,0.2);
+    line-height: 30px;
+    margin-top:-15px;
+    text-decoration: none;
+    color: #737373;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    cursor: pointer;
+}
+#imageSlide>.before{
+    left: 10px;
+}
+#imageSlide>.after{
+    right:10px;
+}
+#imageSlide:hover>.before{
+    opacity: 1;
+}
+#imageSlide:hover>.after{
+    opacity: 1;
+}

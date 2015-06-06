@@ -1,5 +1,0 @@
-(function(){
-    window.Carder = function(){
-
-    };
-})();
