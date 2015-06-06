@@ -16,7 +16,6 @@ router.get('/render', function(req, res) {
   }
   
   renderer.render(url, timeout, function(err, html) {
-    console.log(html);
     return res.json({html: html});
   });
 });
