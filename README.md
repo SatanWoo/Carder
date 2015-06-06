@@ -26,6 +26,18 @@
 }
 ```
 
+##### 网店通用
+
+```
+{
+  type: "ecommerce",
+  image: "单张图片地址",
+  title: "标题",
+  price: "价格",
+  priceCurrency: "RMB"
+}
+```
+
 ##### 土豆
 
 请求source为`Tudou`。
