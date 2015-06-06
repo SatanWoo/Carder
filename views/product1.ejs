@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Carder</title>
+  <link rel="stylesheet" href="/stylesheets/product1.css"/>
+</head>
+<body>
+<div class="card">
+  <header class="card-gallery" id="slideList">
+    <%images.forEach(function(slideImg,index){%>
+    <%if(index == 0){%>
+    <div class="card-image-wrap slideCard" style="left: 0;">
+    <%}else{%>
+      <div class="card-image-wrap slideCard">
+    <%}%>
+        <div class="card-image" style="background-image: url(<%=slideImg%>);" alt="" ></div>
+      </div>
+    <%})%>
+      <a href="javascript:void(0)" id="before" class="iconfont"> &#xe61b;</a>
+      <a href="javascript:void(0)" id="after" class="iconfont"> &#xe615;</a>
+  </header>
+  <div class="card-content">
+    <div class="card-title">
+      <%=title%>
+    </div>
+    <div class="card-description" id="content">
+      <%=detail%>
+    </div>
+    <footer class="card-footer">
+      <span class="card-price">
+        <span class="card-price-inner"><%=price%></span>
+      </span>
+    </footer>
+  </div>
+  <script src="/script/slide.js"></script>
+  <script>
+    var slide = new Slide('slideList','slideCard','before','after','content',340);
+    slide.autoSlide();
+  </script>
+</div>
+</body>
+</html>
