@@ -16,7 +16,7 @@ router.get('/download', function(req, res) {
     }
 
     renderer.download(url, timeout, function(err, imgs) {
-        return res.json({html: imgs});
+        return res.json({data: imgs});
     });
 });
 
