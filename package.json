@@ -16,9 +16,19 @@
     "morgan": "~1.3.0",
     "nedb": "^1.1.2",
     "phantom": "^0.7.2",
-    "jsdom": "^5.4.3",
-    "serve-favicon": "~2.1.3"
+    "serve-favicon": "~2.1.3",
+    "url":"0.10.3",
+    "python-shell":"0.1.0"
   },
   "devDependencies": {
+    "es6ify": "^1.6.0",
+    "grunt": "^0.4.5",
+    "grunt-browserify": "^3.8.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "jsdom": "^5.4.3",
+    "load-grunt-tasks": "^3.2.0",
+    "react": "^0.13.3",
+    "react-router": "^0.13.3",
+    "reactify": "^1.1.1"
   }
 }

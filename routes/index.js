@@ -1,7 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var renderer = require('../lib/renderer');
+var API = require('../lib/API');
 var lzx = require('../lib/lzx');
+
+router.get('/', function(res, res) {
+  return res.render('index');
+});
 
 router.get('/iframe', function(req, res) {
     var url = req.query.url;
@@ -45,8 +49,8 @@ router.get('/render', function(req, res) {
     var url = req.query.url;
     var timeout = req.query.timeout || 3000;
     if (!url) return res.json({error: 'no url specified'});
-
-    renderer.render(url, timeout, function(err, html) {
+    
+    API.parseHTML(url, timeout, function(err, html) {
         return res.json({html: html});
     });
 });
