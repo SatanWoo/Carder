@@ -29,8 +29,7 @@ var URLInput = React.createClass({
   },
   handleSubmit: function(e) {
     e.preventDefault();
-    console.log(("<iframe src=\"http://localhost:3000/iframe?source=" + this.state.source + "&url=" + this.state.url + "\"/>"));
-    this.setState({iframeCode: ("<iframe src=\"http://localhost:3000/iframe?source=" + this.state.source + "&url=" + this.state.url + "\"/>")});
+    this.setState({iframeCode: ("<iframe src=\"http://localhost:3000/iframe?source=" + this.state.source + "&url=" + encodeURIComponent(this.state.url) + "\"/>")});
   },
   renderIFrameCode: function() {
     if (!this.state.iframeCode)
