@@ -10,7 +10,6 @@ router.get('/iframe', function(req, res) {
 
   lzx.transform(url, source).
     then(function(data) {
-      console.log('data: ' + JSON.stringify(data));
       res.render('iframe', {
         query: req.query,
         data: data

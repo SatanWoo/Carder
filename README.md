@@ -10,3 +10,15 @@
 
 `http://xxx/iframe?url=xxxx`可以带参数`source`，获取指定网站的卡片。例如，`http://xxx/iframe?url=xxxx&source=taobao`
 
+### data结构
+
+##### ebay
+
+请求source为`Ebay`。
+
+```
+{
+  type: "ebay",
+  image: "单张图片地址"
+}
+```
