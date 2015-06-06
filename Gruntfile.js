@@ -4,7 +4,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     watch: {
       scripts: {
-        files: [],
+        files: ['UI/**/*.js'],
         tasks: ['browserify'],
         options: {
           spawn: false,
@@ -22,7 +22,7 @@ module.exports = function(grunt) {
           dest: 'public/javascripts'
         }],
         options: {
-          transform: ['reactify']
+          transform: ['reactify', 'es6ify']
         }
       }
     }
