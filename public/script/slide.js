@@ -74,23 +74,52 @@ function Slide(_parent,_child,_before,_after,_content,_slideMaxHeight){
         }
     });
 
-    this.content.onmousewheel = function(e){
-        var contentTop = self.content.offsetTop;
-        var parentTop = self.parent.offsetTop;
+    document.getElementsByClassName('card')[0].onmousewheel = function(e){
+        var parentHeight = self.parent.clientHeight;
         var contentHeight = self.content.clientHeight;
         var contentScrollHeight = self.content.scrollHeight;
-        var slideListHeight = contentTop - parentTop;
-        if(contentHeight <= self.slideMaxHeight
-            && slideListHeight > 30
+        //console.log(e.wheelDeltaY ,contentHeight ,parentHeight,contentScrollHeight);
+        console.log(e.wheelDeltaY > 0 , parentHeight== 30);
+        if(e.wheelDeltaY < 0
+            &&contentHeight >= 80
+            && parentHeight > 30
+            && parentHeight <= self.slideMaxHeight
             && contentScrollHeight > contentHeight){
 
-            var newContentHeight = contentHeight - e.wheelDeltaY;
-            var newSlideListHeight = slideListHeight + e.wheelDeltaY;
+                var newContentHeight = contentHeight - e.wheelDeltaY;
+                var newSlideListHeight = parentHeight + e.wheelDeltaY;
+                if(newSlideListHeight <= 30){
+                    newSlideListHeight = 30;
+                    newContentHeight = (parentHeight - 30) + contentHeight;
+                    self.content.style.overflow = 'auto';
+                }
+                if(newContentHeight >= contentScrollHeight){
+                    newContentHeight = contentScrollHeight;
+                    newSlideListHeight = contentHeight - newContentHeight + parentHeight;
+                }
+                self.content.style.maxHeight = newContentHeight + 'px';
+                self.parent.style.height = newSlideListHeight + 'px';
+        }else if(e.wheelDeltaY > 0
+            &&contentHeight > 80
+            && parentHeight >= 30
+            && parentHeight < self.slideMaxHeight
+            && contentScrollHeight >= contentHeight
+            &&self.content.scrollTop == 0){
 
+            var newContentHeight = contentHeight - e.wheelDeltaY;
+            var newSlideListHeight = parentHeight + e.wheelDeltaY;
+            if(newContentHeight <= 80){
+                newContentHeight = 80;
+                newSlideListHeight = contentHeight - 80 + parentHeight;
+            }
+            if(newSlideListHeight >= self.slideMaxHeight){
+                newSlideListHeight = self.slideMaxHeight;
+                newContentHeight = (parentHeight - newSlideListHeight) + contentHeight;
+            }
             self.content.style.maxHeight = newContentHeight + 'px';
             self.parent.style.height = newSlideListHeight + 'px';
-
-         }
+            self.content.style.overflow = 'hidden';
+        }
     };
 
 
