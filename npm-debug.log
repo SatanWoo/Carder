@@ -1,0 +1,28 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'start' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 warn invalid config proxy="http://:port"
+5 warn invalid config Must be a full url with 'http://'
+6 verbose run-script [ 'prestart', 'start', 'poststart' ]
+7 info prestart fetcher@0.0.0
+8 info start fetcher@0.0.0
+9 verbose unsafe-perm in lifecycle true
+10 info fetcher@0.0.0 Failed to exec start script
+11 error fetcher@0.0.0 start: `node ./bin/www`
+11 error Exit status 8
+12 error Failed at the fetcher@0.0.0 start script.
+12 error This is most likely a problem with the fetcher package,
+12 error not with npm itself.
+12 error Tell the author that this fails on your system:
+12 error     node ./bin/www
+12 error You can get their info via:
+12 error     npm owner ls fetcher
+12 error There is likely additional logging output above.
+13 error System Darwin 14.3.0
+14 error command "node" "/usr/local/bin/npm" "start"
+15 error cwd /Users/z/Documents/Carder
+16 error node -v v0.10.33
+17 error npm -v 1.4.28
+18 error code ELIFECYCLE
+19 verbose exit [ 1, true ]
