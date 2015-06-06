@@ -2,9 +2,8 @@ var express = require('express');
 var router = express.Router();
 var renderer = require('../lib/renderer');
 
-/* GET home page. */
-router.get('/', function(req, res) {
-  res.render('index', { title: 'Express' });
+router.get('/iframe', function(req, res) {
+  res.render('iframe');
 });
 
 router.get('/render', function(req, res) {
@@ -16,7 +15,6 @@ router.get('/render', function(req, res) {
   }
   
   renderer.render(url, timeout, function(err, html) {
-    console.log(html);
     return res.json({html: html});
   });
 });
