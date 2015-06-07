@@ -8,6 +8,7 @@ function Slide(_parent,_slideImg,_before,_after,_content,_slideMaxHeight){
     this.slideOrder = 0;
     this.hasSlideImgMove = false;
     this.slideMaxHeight = _slideMaxHeight;
+    this.curentSlideImg = null;
 
     var self = this;
 
@@ -34,25 +35,32 @@ function Slide(_parent,_slideImg,_before,_after,_content,_slideMaxHeight){
     };
 
     this.toBefore = function(before,after){
-        self.child[after].style.cssText = 'left:-100%;';
         var newNode = this.createSlideImgNode(after);
-        newNode.style.left = 'left:-100%';
+        newNode.style.left = '-100%';
+        var slideCard = document.getElementsByClassName('slideCard');
+        var currentSlideNode = slideCard[slideCard.length - 1];
         setTimeout(function(){
-            self.child[before].style.cssText = 'left:100%;transition:all 0.6s ease;';
-            self.child[after].style.cssText = 'left:0;transition:all 0.6s ease;';
+            slideCard[slideCard.length - 1].style.cssText = 'left:100%;';
+            self.parent.appendChild(newNode);
+            slideCard[slideCard.length - 1].style.cssText ='left:0;transition:all 0.6s ease;';
             setTimeout(function(){
                 self.hasSlideImgMove = false;
+                currentSlideNode.parentNode.removeChild(currentSlideNode);
             },700);
         },10);
     };
     this.toAfter = function(before,after){
         var newNode = this.createSlideImgNode(after);
-        newNode.style.left = 'left:100%';
+        newNode.style.left = '100%';
+        var slideCard = document.getElementsByClassName('slideCard');
+        var currentSlideNode = slideCard[slideCard.length - 1];
         setTimeout(function(){
-            self.child[before].style.cssText = 'left:-100%;transition:all 0.6s ease;';
-            self.child[after].style.cssText = 'left:0;transition:all 0.6s ease;';
+            slideCard[slideCard.length - 1].style.cssText = 'left:-100%;';
+            self.parent.appendChild(newNode);
+            slideCard[slideCard.length - 1].style.cssText ='left:0;transition:all 0.6s ease;';
             setTimeout(function(){
                 self.hasSlideImgMove = false;
+                currentSlideNode.parentNode.removeChild(currentSlideNode);
             },700);
         },10);
     };

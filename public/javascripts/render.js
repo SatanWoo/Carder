@@ -49,14 +49,14 @@ function render(){
                 }
                 html += ' <div class="card-content">\
                 <a href="'+ query.url +'" target="_blank" class="card-title">'+
-                data.title +
-                '</a>\
-                <div class="card-description" id="content">'+
-                data.description+
-                '</div>\
-                <footer class="card-footer">\
+                data.title + '</a>';
+
+                if(data.type != 'ebay'){
+                    html += '<div class="card-description" id="content">' + data.description + '</div>';
+                }
+                html+=' <footer class="card-footer">\
                 <span class="card-price">\
-                <span class="card-price-inner">' + data.priceCurrency + data.price + '</span>\
+                <span class="card-price-inner">$' + data.price + '</span>\
                 </span>\
                 </footer>\
                 </div>';
@@ -104,7 +104,7 @@ function render(){
                 <footer class="card-footer">\
                 <a target="_blank" href="' + query.url + '" class="knowMore">Know More</a>\
                 </footer>\
-                </div>'
+                </div>';
                 document.getElementsByClassName('card')[0].innerHTML = html;
                 if(data.images.length > 1){
                     var slide = new Slide('slideList',data.images,'before','after','content',150);
