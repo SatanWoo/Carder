@@ -37,9 +37,9 @@ function Slide(_parent,_slideImg,_before,_after,_content,_slideMaxHeight){
         var newNode = this.createSlideImgNode(after);
         newNode.style.left = '-100%';
         var slideCard = document.getElementsByClassName('slideCard');
-        var currentSlideNode = slideCard[slideCard.length - 1];
+        var currentSlideNode = slideCard[0];
         setTimeout(function(){
-            slideCard[slideCard.length - 1].style.cssText = 'left:100%;';
+            slideCard[0].style.cssText = 'left:100%;';
             self.parent.insertBefore(newNode,null);
             slideCard[slideCard.length - 1].style.cssText ='left:0;transition:all 0.6s ease;';
             setTimeout(function(){
