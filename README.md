@@ -21,7 +21,8 @@
   content: "文章内容",
   keywords: ["关键词1", "关键词2"],
   images: ["url1", "url2"],
-  title: "文章标题"
+  title: "文章标题",
+  description: "描述"
 }
 ```
 

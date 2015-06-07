@@ -6,6 +6,7 @@
 __author__ = "Wayne Ho"
 
 import re
+import os
 import sys
 import json
 from bs4 import BeautifulSoup
@@ -72,6 +73,7 @@ def removeTags(text):
     text = re.compile(r'<script[^>]*?>.*?</script>', re.I | re.S)\
         .sub("\n", text)
     text = re.compile(r'<style[^>]*?>.*?</style>', re.I | re.S).sub("\n", text)
+    print text
     #text = re.compile(r'<img[^>]*?>', re.I | re.S).sub("|imgtag|\n", text)
     #text = processImages(text)
     #text = re.compile(r'<a[^>]*?>.*?</a>', re.I | re.S).sub(" ", text)
@@ -94,7 +96,7 @@ def processImages(text):
 
 
 def getWebImageSize(url):
-    """return width and height of image via web
+    """return width and height of image via web (without loading whole image)
     @param url: url of the image
     @type url: str
     @return: (int, int)
@@ -373,13 +375,49 @@ def getArguments():
     args = parser.parse_args()
     return args
 
+
+def parseVideo(url):
+    """detect whether it's a video webpage, return its brand
+    @param url: url
+    @type url: str
+    @return: str
+    """
+    types = ["tudou", "youku"]
+    for _type in types:
+        if url.find(_type + ".com/") != -1:
+            return _type
+    return ""
+
 if __name__ == "__main__":
     args = getArguments()
     if args.debug:
         logging.getLogger().setLevel(logging.DEBUG)
     raw = json.loads(readFile(args.file))
-    raw_text = raw["html"].encode("utf8")
-    info = extract(raw_text)
+    video_web = parseVideo(raw["url"])
+    if video_web != "":
+        info = {"type": "video"}
+        url = raw["url"]
+        if video_web == "tudou":
+            if url.find("programs") != -1:  # program
+                if url[-1] == "/":
+                    url = url[:-1]
+            else:  # album
+                url = os.path.splitext(url)[0]
+            # parse url
+            i = len(url) - 1
+            while i >= 0 and url[i] != "/":
+                i -= 1
+            assert(i >= 0)
+            vid = url[i + 1:]
+            info["url"] = "http://www.tudou.com/programs/view/html5embed.action?code=%s" % vid
+        elif video_web == "youku":
+            vid = url[url.find("v_show/id_") + 10:url.find(".html")]
+            info["url"] = "http://player.youku.com/embed/%s" % vid
+    else:
+        raw_text = raw["html"].encode("utf8")
+        info = extract(raw_text)
+        info["type"] = "article"
+    # output
     if args.human:
         for key, value in info.items():
             logging.info("【%s】\n%s\n" % (key, json.dumps(
