@@ -112,6 +112,10 @@ function render(){
                 }
 
             }
+            else if(query.source == 'Tudou'){
+                document.getElementsByClassName('card')[0].style.cssText = 'width:280px;margin:0 auto;';
+                document.getElementsByClassName('card')[0].innerHTML = '<iframe width="280"  frameborder="0" src="http://www.tudou.com/programs/view/html5embed.action?code=' + data.tudouId + '"></iframe>'
+            }
         }
     }
 }

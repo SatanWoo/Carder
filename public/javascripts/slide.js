@@ -39,24 +39,24 @@ function Slide(_parent,_slideImg,_before,_after,_content,_slideMaxHeight){
         var slideCard = document.getElementsByClassName('slideCard');
         var currentSlideNode = slideCard[0];
         setTimeout(function(){
-            slideCard[0].style.cssText = 'left:100%;';
-            self.parent.insertBefore(newNode,null);
-            slideCard[slideCard.length - 1].style.cssText ='left:0;transition:all 0.6s ease;';
+            slideCard[0].style.cssText = 'left:100%;transition:all 0.6s ease;';
+            self.parent.insertBefore(newNode,self.parent.childNodes[0]);
+            slideCard[0].style.cssText ='left:0;transition:all 0.6s ease;';
             setTimeout(function(){
                 self.hasSlideImgMove = false;
                 currentSlideNode.parentNode.removeChild(currentSlideNode);
-            },2000);
+            },700);
         },10);
     };
     this.toAfter = function(before,after){
         var newNode = this.createSlideImgNode(after);
         newNode.style.left = '100%';
         var slideCard = document.getElementsByClassName('slideCard');
-        var currentSlideNode = slideCard[slideCard.length - 1];
+        var currentSlideNode = slideCard[0];
         setTimeout(function(){
-            slideCard[slideCard.length - 1].style.cssText = 'left:-100%;';
-            self.parent.insertBefore(newNode,null);
-            slideCard[slideCard.length - 1].style.cssText ='left:0;transition:all 0.6s ease;';
+            slideCard[0].style.cssText = 'left:-100%;transition:all 0.6s ease;';
+            self.parent.insertBefore(newNode,self.parent.childNodes[0]);
+            slideCard[0].style.cssText ='left:0;transition:all 0.6s ease;';
             setTimeout(function(){
                 self.hasSlideImgMove = false;
                 currentSlideNode.parentNode.removeChild(currentSlideNode);
