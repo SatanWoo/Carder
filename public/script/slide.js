@@ -1,6 +1,6 @@
-function Slide(_parent,_child,_before,_after,_content,_slideMaxHeight){
+function Slide(_parent,_slideImg,_before,_after,_content,_slideMaxHeight){
     this.parent = document.getElementById(_parent);
-    this.child = document.getElementsByClassName(_child);
+    this.slideImg = _slideImg;
     this.before =_before;
     this.after = _after;
     this.content = document.getElementById(_content);
@@ -19,7 +19,7 @@ function Slide(_parent,_child,_before,_after,_content,_slideMaxHeight){
 
     this.getNextOrder = function(){
         this.slideOrder++;
-        if(this.slideOrder >= this.child.length){
+        if(this.slideOrder >= this.slideImg.length){
             this.slideOrder = 0;
         }
         return this.slideOrder;
@@ -27,31 +27,40 @@ function Slide(_parent,_child,_before,_after,_content,_slideMaxHeight){
     this.getForwardOrder = function(){
         this.slideOrder--;
         if(this.slideOrder < 0){
-            this.slideOrder = this.child.length -1;;
+            this.slideOrder = this.slideImg.length -1;;
         }
         return this.slideOrder;
 
     };
 
     this.toBefore = function(before,after){
-            self.child[after].style.cssText = 'left:-100%;';
+        self.child[after].style.cssText = 'left:-100%;';
+        var newNode = this.createSlideImgNode(after);
+        newNode.style.left = 'left:-100%';
+        setTimeout(function(){
+            self.child[before].style.cssText = 'left:100%;transition:all 0.6s ease;';
+            self.child[after].style.cssText = 'left:0;transition:all 0.6s ease;';
             setTimeout(function(){
-                self.child[before].style.cssText = 'left:100%;transition:all 0.6s ease;';
-                self.child[after].style.cssText = 'left:0;transition:all 0.6s ease;';
-                setTimeout(function(){
-                    self.hasSlideImgMove = false;
-                },700);
-            },10);
+                self.hasSlideImgMove = false;
+            },700);
+        },10);
     };
     this.toAfter = function(before,after){
-            self.child[after].style.cssText = 'left:100%;';
+        var newNode = this.createSlideImgNode(after);
+        newNode.style.left = 'left:100%';
+        setTimeout(function(){
+            self.child[before].style.cssText = 'left:-100%;transition:all 0.6s ease;';
+            self.child[after].style.cssText = 'left:0;transition:all 0.6s ease;';
             setTimeout(function(){
-                self.child[before].style.cssText = 'left:-100%;transition:all 0.6s ease;';
-                self.child[after].style.cssText = 'left:0;transition:all 0.6s ease;';
-                setTimeout(function(){
-                    self.hasSlideImgMove = false;
-                },700);
-            },10);
+                self.hasSlideImgMove = false;
+            },700);
+        },10);
+    };
+    this.createSlideImgNode = function(_order){
+        var newNode = document.createElement('div');
+        newNode.className = 'slideCard card-image-wrap ';
+        newNode.innerHTML = '<div class="card-image" style="background-image: url(' + data.image[_order] + ');" alt="" ></div>'
+        return newNode;
     };
 
 

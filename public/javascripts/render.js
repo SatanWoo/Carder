@@ -19,17 +19,35 @@ function render(){
         if (ajaxReq.readyState==4 && ajaxReq.status==200)
         {
             var data = JSON.parse(ajaxReq.responseText);
-            if(data.type == 'ebay' && data.type == 'ecommerce'){
+            if(data.type == 'ebay' || data.type == 'ecommerce'){
                 cssNode.href = '/stylesheets/product1.css';
                 document.getElementsByTagName('head')[0].appendChild(cssNode);
-                html = '<header class="card-gallery" id="slideList">\
-                <div class="card-image-wrap slideCard" style="left: 0;">\
-                <div class="card-image" style="background-image: url('+ data.image +');" alt="" ></div>\
-                 </div>\
-                <a href="javascript:void(0)" id="before" class="iconfont"> &#xe61b;</a>\
-                <a href="javascript:void(0)" id="after" class="iconfont"> &#xe615;</a>\
-                </header>\
-                <div class="card-content">\
+                if(data.image.length > 0 ){
+                    for(var i = 0;i < data.image.length;i++){
+                        if(i == 0){
+                            console.log(1);
+                            html += '<header class="card-gallery"  id="slideList">\
+                       <div class=" slideCard card-image-wrap" style="left: 0;">\
+                       <div class="card-image" style="background-image: url(' + data.image[0] + ');" alt="" ></div>\
+                       </div>'
+                        }
+                        else{
+                            html += '<div class=" slideCard card-image-wrap ">\
+                       <div class="card-image" style="background-image: url(' + data.image[0] + ');" alt="" ></div>\
+                       </div>'
+                        }
+                    }
+
+                    if(data.image.length > 1){
+                        html += '<a href="javascript:void(0)" id="before" class="iconfont"> &#xe61b;</a>\
+                    <a href="javascript:void(0)" id="after" class="iconfont"> &#xe615;</a>\
+                    </header>'
+                    }
+                    else{
+                        html += '</header>'
+                    }
+                }
+                html += ' <div class="card-content">\
                 <a href="'+ query.url +'" target="_blank" class="card-title">'+
                 data.title +
                 '</a>\
@@ -43,7 +61,10 @@ function render(){
                 </footer>\
                 </div>';
                 document.getElementsByClassName('card')[0].innerHTML = html;
-                //var slide = new Slide('slideList','slideCard','before','after','content',150);
+                if(data.image.length > 1){
+                    var slide = new Slide('slideList',data.image,'before','after','content',150);
+                    slide.autoSlide();
+                }
             }
             else if(data.type == 'article'){
                 cssNode.href = '/stylesheets/common.css';
@@ -57,7 +78,7 @@ function render(){
                        </div>'
                        }
                        else{
-                            html += '<div class=" slideCard" style="left: 0;">\
+                            html += '<div class=" slideCard">\
                        <div class="card-image" style="background-image: url(' + data.images[0] + ');" alt="" ></div>\
                        </div>'
                        }
@@ -85,7 +106,10 @@ function render(){
                 </footer>\
                 </div>'
                 document.getElementsByClassName('card')[0].innerHTML = html;
-                //var slide = new Slide('slideList','slideCard','before','after','content',150);
+                if(data.images.length > 1){
+                    var slide = new Slide('slideList',data.images,'before','after','content',150);
+                    slide.autoSlide();
+                }
 
             }
         }
