@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var API = require('../lib/API');
 var lzx = require('../lib/lzx');
+var cache = require('../lib/cache');
 
 router.get('/', function(res, res) {
   return res.render('index');
@@ -11,10 +12,20 @@ router.get('/iframeAPI', function(req, res) {
   var url = req.query.url;
   var source = req.query.source || 'default';
   if (!url) return res.send('no url specified');
-
-  lzx.transform(url, source).
-  then(function(data) {
-    res.json(data);
+  cache.find(url, source, function(err, doc) {
+    if (doc) {
+      res.json(doc.data);
+    }
+    else {
+      lzx.transform(url, source).
+        then(function(data) {
+          res.json(data);
+          cache.insert(url, source, data, function(err) {
+            if (err) { console.log('cache failed'); }
+            else console.log('cache success');
+          });
+        });
+    }
   });
 });
 
