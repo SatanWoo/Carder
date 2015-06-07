@@ -32,7 +32,7 @@
 ```
 {
   type: "ebay",
-  image: "单张图片地址",
+  image: ["单张图片地址"],
   title: "标题",
   price: "价格",
   priceCurrency: "货币，一般是USD"
@@ -46,7 +46,7 @@
 ```
 {
   type: "ecommerce",
-  image: "单张图片地址",
+  image: ["单张图片地址"],
   title: "标题",
   price: "价格",
   priceCurrency: "RMB"
