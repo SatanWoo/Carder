@@ -382,7 +382,7 @@ def parseVideo(url):
     @type url: str
     @return: str
     """
-    types = ["tudou"]
+    types = ["tudou", "youku"]
     for _type in types:
         if url.find(_type + ".com/") != -1:
             return _type
@@ -409,8 +409,10 @@ if __name__ == "__main__":
                 i -= 1
             assert(i >= 0)
             vid = url[i + 1:]
-            final_url = "http://www.tudou.com/programs/view/html5embed.action?code=%s" % vid
-            info["url"] = final_url
+            info["url"] = "http://www.tudou.com/programs/view/html5embed.action?code=%s" % vid
+        elif video_web == "youku":
+            vid = url[url.find("v_show/id_") + 10:url.find(".html")]
+            info["url"] = "http://player.youku.com/embed/%s" % vid
     else:
         raw_text = raw["html"].encode("utf8")
         info = extract(raw_text)
