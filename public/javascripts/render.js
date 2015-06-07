@@ -49,14 +49,14 @@ function render(){
                 }
                 html += ' <div class="card-content">\
                 <a href="'+ query.url +'" target="_blank" class="card-title">'+
-                data.title +
-                '</a>\
-                <div class="card-description" id="content">'+
-                data.description+
-                '</div>\
-                <footer class="card-footer">\
+                data.title + '</a>'
+
+                if(data.type != 'ebay'){
+                    html += '<div class="card-description" id="content">' + data.description + '</div>';
+                }
+                html+=' <footer class="card-footer">\
                 <span class="card-price">\
-                <span class="card-price-inner">' + data.priceCurrency + data.price + '</span>\
+                <span class="card-price-inner">$' + data.price + '</span>\
                 </span>\
                 </footer>\
                 </div>';
