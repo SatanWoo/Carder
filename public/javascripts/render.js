@@ -5,6 +5,9 @@
 
 function render(){
     console.log(query);
+    var html='';
+    var cssNode = document.createElement('link');
+    cssNode.rel="stylesheet";
 
     var ajaxReq = new XMLHttpRequest();
     ajaxReq.open("get",'/iframeAPI?url=' + encodeURIComponent(query.url) + '&source=' + query.source,true);
@@ -16,15 +19,13 @@ function render(){
         if (ajaxReq.readyState==4 && ajaxReq.status==200)
         {
             var data = JSON.parse(ajaxReq.responseText);
-            if(data.type == 'ecommerce'){
-                var cssNode = document.createElement('link');
+            if(data.type == 'ebay' && data.type == 'ecommerce'){
                 cssNode.href = '/stylesheets/product1.css';
-                cssNode.rel="stylesheet";
                 document.getElementsByTagName('head')[0].appendChild(cssNode);
                 html = '<header class="card-gallery" id="slideList">\
-                    <div class="card-image-wrap slideCard" style="left: 0;">\
-                        <div class="card-image" style="background-image: url('+ data.image +');" alt="" ></div>\
-                    </div>\
+                <div class="card-image-wrap slideCard" style="left: 0;">\
+                <div class="card-image" style="background-image: url('+ data.image +');" alt="" ></div>\
+                 </div>\
                 <a href="javascript:void(0)" id="before" class="iconfont"> &#xe61b;</a>\
                 <a href="javascript:void(0)" id="after" class="iconfont"> &#xe615;</a>\
                 </header>\
@@ -32,9 +33,9 @@ function render(){
                 <a href="'+ query.url +'" target="_blank" class="card-title">'+
                 data.title +
                 '</a>\
-                <div class="card-description" id="content">\
-                detail\
-                </div>\
+                <div class="card-description" id="content">'+
+                data.description+
+                '</div>\
                 <footer class="card-footer">\
                 <span class="card-price">\
                 <span class="card-price-inner">' + data.priceCurrency + data.price + '</span>\
@@ -42,8 +43,51 @@ function render(){
                 </footer>\
                 </div>';
                 document.getElementsByClassName('card')[0].innerHTML = html;
+                //var slide = new Slide('slideList','slideCard','before','after','content',150);
             }
-            console.log(data);
+            else if(data.type == 'article'){
+                cssNode.href = '/stylesheets/common.css';
+                document.getElementsByTagName('head')[0].appendChild(cssNode);
+                if(data.images.length > 0 ){
+                   for(var i = 0;i < data.images.length;i++){
+                       if(i == 0){
+                           html += '<header  id="slideList">\
+                       <div class=" slideCard" style="left: 0;">\
+                       <div class="card-image" style="background-image: url(' + data.images[0] + ');" alt="" ></div>\
+                       </div>'
+                       }
+                       else{
+                            html += '<div class=" slideCard" style="left: 0;">\
+                       <div class="card-image" style="background-image: url(' + data.images[0] + ');" alt="" ></div>\
+                       </div>'
+                       }
+                   }
+
+                    if(data.images.length > 1){
+                        html += '<a href="javascript:void(0)" id="before" class="iconfont"> &#xe61b;</a>\
+                    <a href="javascript:void(0)" id="after" class="iconfont"> &#xe615;</a>\
+                    </header>'
+                    }
+                    else{
+                        html += '</header>'
+                    }
+                }
+
+                html += ' <div class="card-content">\
+                <div class="card-title">'+
+                data.title +
+                '</div>\
+                <div class="card-description" id="content">'+
+                 data.content +
+                '</div>\
+                <footer class="card-footer">\
+                <a target="_blank" href="' + query.url + '" class="knowMore">Know More</a>\
+                </footer>\
+                </div>'
+                document.getElementsByClassName('card')[0].innerHTML = html;
+                //var slide = new Slide('slideList','slideCard','before','after','content',150);
+
+            }
         }
     }
 }
