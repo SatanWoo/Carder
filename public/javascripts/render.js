@@ -112,6 +112,10 @@ function render(){
                 }
 
             }
+            else if(data.type == 'video'){
+                document.getElementsByClassName('card')[0].style.cssText = 'width:100%;height:100%;margin:0 auto;';
+                document.getElementsByClassName('card')[0].innerHTML = '<iframe style="width:100%;height:100%;" frameborder="0" src='+ data.url+ '"></iframe>'
+            }
         }
     }
 }
