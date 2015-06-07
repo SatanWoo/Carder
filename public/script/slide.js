@@ -11,7 +11,6 @@ function Slide(_parent,_child,_before,_after,_content,_slideMaxHeight){
 
     var self = this;
 
-    console.log(this.before,this.after);
     this.autoSlide = function(){
         this.slideTimer = setInterval(function(){
             self.toAfter(self.slideOrder,self.getNextOrder());

@@ -43,6 +43,8 @@ html,body{
 .card-title {
     margin-bottom: 10px;
     font-size: 1.2rem;
+    text-decoration: none;
+    color: #2D2D2D;
 }
 .card-price {
     font-size: .9rem;
