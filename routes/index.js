@@ -40,8 +40,8 @@ router.get('/render', function(req, res) {
   var timeout = req.query.timeout || 3000;
   if (!url) return res.json({error: 'no url specified'});
 
-  API.parseHTML(url, timeout, function(err, html) {
-    return res.json({html: html});
+  API.parseHTML(url, timeout, function(err, message) {
+        //console.log(message);
   });
 });
 
