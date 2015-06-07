@@ -41,7 +41,7 @@ router.get('/render', function(req, res) {
   if (!url) return res.json({error: 'no url specified'});
 
   API.parseHTML(url, timeout, function(err, html) {
-    return res.json({html: html});
+        console.log(html);
   });
 });
 
