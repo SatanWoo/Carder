@@ -73,7 +73,6 @@ def removeTags(text):
     text = re.compile(r'<script[^>]*?>.*?</script>', re.I | re.S)\
         .sub("\n", text)
     text = re.compile(r'<style[^>]*?>.*?</style>', re.I | re.S).sub("\n", text)
-    print text
     #text = re.compile(r'<img[^>]*?>', re.I | re.S).sub("|imgtag|\n", text)
     #text = processImages(text)
     #text = re.compile(r'<a[^>]*?>.*?</a>', re.I | re.S).sub(" ", text)
